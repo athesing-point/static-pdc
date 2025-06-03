@@ -51,6 +51,23 @@ npx wrangler deploy
 - `wrangler.toml` – Wrangler configuration file.
 - `pdc-zip/` – **Contains the static site export from Webflow.**
 
+## Robots and Indexing Toggle
+
+The Worker script includes a toggle constant in `worker.js`:
+
+```js
+const ENABLE_NO_INDEX = true; // Set to false to allow all crawlers and page indexing
+```
+
+- When `ENABLE_NO_INDEX` is `true` (default):
+  - All HTML responses will include a `<meta name="robots" content="noindex, nofollow">` tag (if not already present).
+  - `/robots.txt` will block all major crawlers and bots from indexing the site.
+- When `ENABLE_NO_INDEX` is `false`:
+  - No robots meta tag is injected.
+  - `/robots.txt` will allow all crawlers to index the site.
+
+Change this constant as needed before deploying to control search engine indexing and crawler access.
+
 ## References
 
 - [Cloudflare Workers Docs](https://developers.cloudflare.com/workers/)

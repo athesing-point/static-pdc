@@ -2,16 +2,17 @@
  * Cloudflare Worker for serving static assets from the pdc-zip directory (Webflow export).
  *
  * - Handles requests for static files using @cloudflare/kv-asset-handler.
- * - Injects a <meta name="robots" content="noindex, nofollow"> tag into HTML responses if not present.
- * - Serves a restrictive robots.txt to block all crawlers.
+ * - If ENABLE_NO_INDEX is true, injects a <meta name="robots" content="noindex, nofollow"> tag into HTML responses if not present, and serves a restrictive robots.txt to block all crawlers.
+ * - If ENABLE_NO_INDEX is false, robots.txt allows all crawlers and no meta tag is injected.
  * - Falls back to index.html for SPA routes, or returns 404 if not found.
  */
 import { getAssetFromKV } from "@cloudflare/kv-asset-handler";
 
-/**
- * The content of /robots.txt, disallowing all crawlers (including major bots and AI scrapers).
- */
-const ROBOTS_TXT = `User-agent: *\nDisallow: /\n\nUser-agent: Googlebot\nDisallow: /\n\nUser-agent: Bingbot\nDisallow: /\n\nUser-agent: Slurp\nDisallow: /\n\nUser-agent: DuckDuckBot\nDisallow: /\n\nUser-agent: Baiduspider\nDisallow: /\n\nUser-agent: Yandex\nDisallow: /\n\nUser-agent: Sogou\nDisallow: /\n\nUser-agent: Exabot\nDisallow: /\n\nUser-agent: facebot\nDisallow: /\n\nUser-agent: facebookexternalhit\nDisallow: /\n\nUser-agent: ia_archiver\nDisallow: /\n\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: ChatGPT-User\nDisallow: /\n\nUser-agent: CCBot\nDisallow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: anthropic-ai\nDisallow: /\n\nUser-agent: Bytespider\nDisallow: /\n\nUser-agent: Amazonbot\nDisallow: /\n\nUser-agent: Applebot\nDisallow: /\n\nUser-agent: SemrushBot\nDisallow: /\n\nUser-agent: AhrefsBot\nDisallow: /\n\nUser-agent: MJ12bot\nDisallow: /\n\nUser-agent: DotBot\nDisallow: /\n\nUser-agent: PetalBot\nDisallow: /\n\nUser-agent: SEOkicks-Robot\nDisallow: /\n\nUser-agent: magpie-crawler\nDisallow: /\n\nUser-agent: SentiBot\nDisallow: /\n\nUser-agent: Scrapy\nDisallow: /\n\nUser-agent: python-requests\nDisallow: /\n\nUser-agent: wget\nDisallow: /\n\nUser-agent: curl\nDisallow: /\n`;
+const ENABLE_NO_INDEX = true; // Set to false to allow all crawlers and page indexing
+
+const ROBOTS_TXT = ENABLE_NO_INDEX
+  ? `User-agent: *\nDisallow: /\n\nUser-agent: Googlebot\nDisallow: /\n\nUser-agent: Bingbot\nDisallow: /\n\nUser-agent: Slurp\nDisallow: /\n\nUser-agent: DuckDuckBot\nDisallow: /\n\nUser-agent: Baiduspider\nDisallow: /\n\nUser-agent: Yandex\nDisallow: /\n\nUser-agent: Sogou\nDisallow: /\n\nUser-agent: Exabot\nDisallow: /\n\nUser-agent: facebot\nDisallow: /\n\nUser-agent: facebookexternalhit\nDisallow: /\n\nUser-agent: ia_archiver\nDisallow: /\n\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: ChatGPT-User\nDisallow: /\n\nUser-agent: CCBot\nDisallow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: anthropic-ai\nDisallow: /\n\nUser-agent: Bytespider\nDisallow: /\n\nUser-agent: Amazonbot\nDisallow: /\n\nUser-agent: Applebot\nDisallow: /\n\nUser-agent: SemrushBot\nDisallow: /\n\nUser-agent: AhrefsBot\nDisallow: /\n\nUser-agent: MJ12bot\nDisallow: /\n\nUser-agent: DotBot\nDisallow: /\n\nUser-agent: PetalBot\nDisallow: /\n\nUser-agent: SEOkicks-Robot\nDisallow: /\n\nUser-agent: magpie-crawler\nDisallow: /\n\nUser-agent: SentiBot\nDisallow: /\n\nUser-agent: Scrapy\nDisallow: /\n\nUser-agent: python-requests\nDisallow: /\n\nUser-agent: wget\nDisallow: /\n\nUser-agent: curl\nDisallow: /\n`
+  : `User-agent: *\nAllow: /\n`;
 
 // Listen for all fetch events and handle them with handleEvent
 addEventListener("fetch", (event) => {
@@ -21,9 +22,9 @@ addEventListener("fetch", (event) => {
 /**
  * Main request handler for the Worker.
  *
- * - Serves /robots.txt with a restrictive policy.
+ * - Serves /robots.txt with a restrictive or permissive policy based on ENABLE_NO_INDEX.
  * - Serves static assets from KV.
- * - Injects <meta name="robots"> into HTML if missing.
+ * - Injects <meta name="robots"> into HTML if missing and ENABLE_NO_INDEX is true.
  * - Falls back to index.html for SPA routes.
  *
  * @param {FetchEvent} event - The fetch event from Cloudflare.
@@ -45,17 +46,17 @@ async function handleEvent(event) {
 
     // Only process HTML responses for meta tag injection
     const contentType = response.headers.get("content-type") || "";
-    if (contentType.includes("text/html")) {
+    if (ENABLE_NO_INDEX && contentType.includes("text/html")) {
       let text = await response.text();
       // If no <meta name="robots"> tag is present, inject one to prevent indexing
       if (!/< *meta\s+name\s*=\s*['"]robots['"][^>]*>/i.test(text)) {
         const headMatch = text.match(/<head(\s[^>]*)?>/i);
         if (headMatch) {
           // Inject meta tag inside <head>
-          text = text.replace(/<head(\s[^>]*)?>/i, (match) => `${match}\n    <meta name="robots" content="noindex, nofollow">`);
+          text = text.replace(/<head(\s[^>]*)?>/i, (match) => `${match}\n    <meta name=\"robots\" content=\"noindex, nofollow\">`);
         } else {
           // If <head> is missing, inject a <head> with the meta tag after <html> or at the top
-          text = text.replace(/<html(\s[^>]*)?>/i, (match) => `${match}\n  <head>\n    <meta name="robots" content="noindex, nofollow">\n  </head>`) || `<head>\n  <meta name="robots" content="noindex, nofollow">\n</head>\n${text}`;
+          text = text.replace(/<html(\s[^>]*)?>/i, (match) => `${match}\n  <head>\n    <meta name=\"robots\" content=\"noindex, nofollow\">\n  </head>`) || `<head>\n  <meta name=\"robots\" content=\"noindex, nofollow\">\n</head>\n${text}`;
         }
       }
       // Return the modified HTML response
