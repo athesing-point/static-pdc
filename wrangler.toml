@@ -1,0 +1,6 @@
+name = "static-pdc"
+compatibility_date = "2024-05-01"
+main = "worker.js"
+
+[site]
+bucket = "/pdc-zip"
