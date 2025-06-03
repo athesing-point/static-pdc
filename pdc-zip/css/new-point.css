@@ -1302,6 +1302,7 @@ figcaption {
   max-width: 62.5rem;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 }
 
 .container-large.timeline {
