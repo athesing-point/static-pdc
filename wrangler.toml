@@ -4,3 +4,5 @@ main = "worker.js"
 
 [site]
 bucket = "/pdc-zip"
+
+# Custom domain: us.point.com (configured in Cloudflare dashboard)
