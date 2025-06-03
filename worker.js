@@ -20,8 +20,14 @@ async function handleEvent(event) {
     if (contentType.includes("text/html")) {
       let text = await response.text();
       // Inject <meta name="robots" ...> if not present
-      if (!text.includes('<meta name="robots"')) {
-        text = text.replace(/<head(\s[^>]*)?>/i, (match) => `${match}\n    <meta name="robots" content="noindex, nofollow">`);
+      if (!/< *meta\s+name\s*=\s*['"]robots['"][^>]*>/i.test(text)) {
+        const headMatch = text.match(/<head(\s[^>]*)?>/i);
+        if (headMatch) {
+          text = text.replace(/<head(\s[^>]*)?>/i, (match) => `${match}\n    <meta name="robots" content="noindex, nofollow">`);
+        } else {
+          // Fallback: inject after <html> or at the beginning
+          text = text.replace(/<html(\s[^>]*)?>/i, (match) => `${match}\n  <head>\n    <meta name="robots" content="noindex, nofollow">\n  </head>`) || `<head>\n  <meta name="robots" content="noindex, nofollow">\n</head>\n${text}`;
+        }
       }
       response = new Response(text, response);
       response.headers.set("content-type", "text/html; charset=utf-8");
