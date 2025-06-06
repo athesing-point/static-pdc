@@ -63,8 +63,8 @@ async function handleEvent(event) {
   if (/^\/blog(\/.*)?$/.test(pathname) || /^\/blog$/.test(pathname) || /^\/blog\/category(\/.*)?$/.test(pathname) || /^\/home-equity(\/.*)?$/.test(pathname) || /^\/partner(\/.*)?$/.test(pathname)) {
     return Response.redirect(`${url.origin}/`, 302);
   }
-  // Redirect all /or/* and /vs/* to "/start"
-  if (/^\/or\/.+/.test(pathname) || /^\/vs\/.+/.test(pathname)) {
+  // Redirect all /or, /or/, /or/* and /vs/* to "/start"
+  if (/^\/or(\/.*)?$/.test(pathname) || /^\/vs\/.+/.test(pathname)) {
     return Response.redirect(`${url.origin}/start`, 302);
   }
 
@@ -123,16 +123,7 @@ async function handleEvent(event) {
     }
     return response;
   } catch (e) {
-    // If asset not found, fallback to index.html for SPA routes (GET only)
-    if (event.request.method === "GET") {
-      try {
-        return await getAssetFromKV(event, { mapRequestToAsset: (req) => new Request(`${new URL(req.url).origin}/index.html`, req) });
-      } catch (e2) {
-        // If index.html is also not found, return 404
-        return new Response("Not found", { status: 404 });
-      }
-    }
-    // For non-GET requests or other errors, return 404
-    return new Response("Not found", { status: 404 });
+    // For any route that does not exist, redirect to home page
+    return Response.redirect(`${url.origin}/`, 302);
   }
 }
