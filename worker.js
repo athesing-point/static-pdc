@@ -77,17 +77,7 @@ async function handleEvent(event) {
     return Response.redirect(`${url.origin}/`, 302);
   }
   // Redirect all /or, /or/, /or/*, /vs, /vs/, /vs/*, /start, /start/, /start/* to "/start"
-  if (
-    /^\/or(\/.*)?$/.test(pathname) ||
-    pathname === "/or" ||
-    pathname === "/or/" ||
-    /^\/vs(\/.*)?$/.test(pathname) ||
-    pathname === "/vs" ||
-    pathname === "/vs/" ||
-    /^\/start(\/.*)?$/.test(pathname) ||
-    pathname === "/start" ||
-    pathname === "/start/"
-  ) {
+  if (/^\/or(\/.*)?$/.test(pathname) || pathname === "/or" || pathname === "/or/" || /^\/vs(\/.*)?$/.test(pathname) || pathname === "/vs" || pathname === "/vs/" || /^\/start(\/.*)?$/.test(pathname)) {
     return Response.redirect(`${url.origin}/start`, 302);
   }
 
