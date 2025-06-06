@@ -8,7 +8,7 @@
  */
 import { getAssetFromKV } from "@cloudflare/kv-asset-handler";
 
-const ENABLE_BACKUP_MODE = false; // Set to true to allow all crawlers and indexing, and serve us.point.com. Set to false to block indexing and redirect us.point.com to point.com.
+const ENABLE_BACKUP_MODE = true; // Set to true to allow all crawlers and indexing, and serve us.point.com. Set to false to block indexing and redirect us.point.com to point.com.
 
 const ROBOTS_TXT = ENABLE_BACKUP_MODE
   ? `User-agent: *\nAllow: /\n`
@@ -59,12 +59,12 @@ async function handleEvent(event) {
   let pathname = url.pathname;
 
   // --- CUSTOM REDIRECTS FOR MISSING CMS CONTENT ---
-  // Redirect all /blog, /blog/*, /blog/category/*, /home-equity/* to "/"
-  if (/^\/blog(\/.*)?$/.test(pathname) || /^\/blog$/.test(pathname) || /^\/blog\/category(\/.*)?$/.test(pathname) || /^\/home-equity(\/.*)?$/.test(pathname)) {
+  // Redirect all /blog, /blog/*, /blog/category/*, /home-equity/*, /partner/* to "/"
+  if (/^\/blog(\/.*)?$/.test(pathname) || /^\/blog$/.test(pathname) || /^\/blog\/category(\/.*)?$/.test(pathname) || /^\/home-equity(\/.*)?$/.test(pathname) || /^\/partner(\/.*)?$/.test(pathname)) {
     return Response.redirect(`${url.origin}/`, 302);
   }
-  // Redirect all /start/* (except exactly "/start") to "/start"
-  if (/^\/start\/.+/.test(pathname)) {
+  // Redirect all /or/* and /vs/* to "/start"
+  if (/^\/or\/.+/.test(pathname) || /^\/vs\/.+/.test(pathname)) {
     return Response.redirect(`${url.origin}/start`, 302);
   }
 
