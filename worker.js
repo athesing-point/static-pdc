@@ -4,7 +4,7 @@
  * - Handles requests for static files using @cloudflare/kv-asset-handler.
  * - If ENABLE_BACKUP_MODE is true, allows all crawlers and page indexing, and serves us.point.com.
  * - If ENABLE_BACKUP_MODE is false, blocks all crawlers and page indexing, and redirects us.point.com to point.com.
- * - Falls back to index.html for SPA routes, or returns 404 if not found.
+ * - Falls back to / for SPA routes, or returns 404 if not found.
  */
 import { getAssetFromKV } from "@cloudflare/kv-asset-handler";
 
@@ -57,6 +57,40 @@ const mapRequestToAsset = (request) => {
 async function handleEvent(event) {
   const url = new URL(event.request.url);
   let pathname = url.pathname;
+
+  // --- CUSTOM REDIRECTS FOR MISSING CMS CONTENT ---
+  // Redirect all /blog, /blog/, /blog/*, /blog/category, /blog/category/, /blog/category/*, /home-equity, /home-equity/, /home-equity/*, /partner, /partner/, /partner/*, /media-room, /media-room/, /media-room/* to "/"
+  if (
+    /^\/blog(\/.*)?$/.test(pathname) ||
+    pathname === "/blog" ||
+    pathname === "/blog/" ||
+    /^\/blog\/category(\/.*)?$/.test(pathname) ||
+    pathname === "/blog/category" ||
+    pathname === "/blog/category/" ||
+    /^\/home-equity(\/.*)?$/.test(pathname) ||
+    pathname === "/home-equity" ||
+    pathname === "/home-equity/" ||
+    /^\/partner(\/.*)?$/.test(pathname) ||
+    pathname === "/partner" ||
+    pathname === "/partner/" ||
+    /^\/media-room(\/.*)?$/.test(pathname) ||
+    pathname === "/media-room" ||
+    pathname === "/media-room/"
+  ) {
+    return Response.redirect(`${url.origin}/`, 302);
+  }
+  // Redirect all /or, /or/, /or/*, /vs, /vs/, /vs/*, /start, /start/, /start/* to "/start"
+  if (
+    /^\/or(\/.*)?$/.test(pathname) ||
+    pathname === "/or" ||
+    pathname === "/or/" ||
+    /^\/vs(\/.*)?$/.test(pathname) ||
+    pathname === "/vs" ||
+    pathname === "/vs/" ||
+    /^\/start(\/.+)$/.test(pathname) // Only subpaths of /start, not /start itself
+  ) {
+    return Response.redirect(`${url.origin}/start`, 302);
+  }
 
   // --- REDIRECTS FOR CLEAN URLS ---
   // Redirect /index or /index.html to /
@@ -113,16 +147,7 @@ async function handleEvent(event) {
     }
     return response;
   } catch (e) {
-    // If asset not found, fallback to index.html for SPA routes (GET only)
-    if (event.request.method === "GET") {
-      try {
-        return await getAssetFromKV(event, { mapRequestToAsset: (req) => new Request(`${new URL(req.url).origin}/index.html`, req) });
-      } catch (e2) {
-        // If index.html is also not found, return 404
-        return new Response("Not found", { status: 404 });
-      }
-    }
-    // For non-GET requests or other errors, return 404
-    return new Response("Not found", { status: 404 });
+    // For any route that does not exist, redirect to home page
+    return Response.redirect(`${url.origin}/`, 302);
   }
 }

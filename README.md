@@ -1,6 +1,6 @@
 # static-pdc
 
-This project deploys a static site to Cloudflare Workers using Wrangler. The `pdc-zip` directory contains the static assets, exported from Webflow.
+This project deploys a static site to Cloudflare Workers using Wrangler. The `pdc-zip` directory contains the static assets, originally exported from Webflow.
 
 ## Prerequisites
 
@@ -10,18 +10,18 @@ This project deploys a static site to Cloudflare Workers using Wrangler. The `pd
 
 ## Setup
 
-1. **Install dependencies:**
+1.  **Install dependencies:**
 
-   ```sh
-   npm install
-   ```
+    ```sh
+    npm install
+    ```
 
-2. **Authenticate with Cloudflare:**
-   If you haven't already, log in to your Cloudflare account:
-   ```sh
-   npx wrangler login
-   ```
-   This will open a browser window for authentication.
+2.  **Authenticate with Cloudflare:**
+    If you haven't already, log in to your Cloudflare account:
+    ```sh
+    npx wrangler login
+    ```
+    This will open a browser window for authentication.
 
 ## Local Development
 
@@ -31,7 +31,7 @@ To preview your Worker locally:
 npx wrangler dev
 ```
 
-This will serve your Worker at [http://localhost:8787](http://localhost:8787).
+This will serve your Worker at `http://localhost:8787`.
 
 ## Deploying to Cloudflare
 
@@ -41,32 +41,54 @@ To deploy your Worker and static assets:
 npx wrangler deploy
 ```
 
-- The deployment will use the configuration in `wrangler.toml`.
-- By default, assets in `pdc-zip` are served as the site bucket.
-- For custom domains, ensure your domain is configured in the Cloudflare dashboard and update the `route` in `wrangler.toml` if needed.
+- The deployment uses the configuration in `wrangler.toml`.
+- Assets in `pdc-zip/` are served as the site's content.
+- For custom domains, ensure your domain is configured in the Cloudflare dashboard. This project is configured for `us.point.com`.
 
 ## Project Structure
 
-- `worker.js` – Cloudflare Worker script for serving static assets and handling requests.
+- `worker.js` – Cloudflare Worker script that handles request routing, redirects, and injects headers.
 - `wrangler.toml` – Wrangler configuration file.
-- `pdc-zip/` – **Contains the static site export from Webflow.**
+- `pdc-zip/` – Contains the static site assets.
+- `package.json` – Project dependencies.
 
-## Robots and Indexing Toggle
+## Features
 
-The Worker script includes a toggle constant in `worker.js`:
+The `worker.js` script provides several key features:
 
-```js
-const ENABLE_NO_INDEX = true; // Set to false to allow all crawlers and page indexing
-```
+### Backup Mode Toggle
 
-- When `ENABLE_NO_INDEX` is `true` (default):
-  - All HTML responses will include a `<meta name="robots" content="noindex, nofollow">` tag (if not already present).
-  - `/robots.txt` will block all major crawlers and bots from indexing the site.
-- When `ENABLE_NO_INDEX` is `false`:
-  - No robots meta tag is injected.
-  - `/robots.txt` will allow all crawlers to index the site.
+A global constant `ENABLE_BACKUP_MODE` in `worker.js` controls the site's behavior:
 
-Change this constant as needed before deploying to control search engine indexing and crawler access.
+- **`ENABLE_BACKUP_MODE = true` (Live Backup Mode):**
+
+  - The backup site `us.point.com` is **live and active**.
+  - Serves content directly from `us.point.com`.
+  - Allows all crawlers and search engine indexing (`robots.txt` is permissive).
+  - This is the standard production mode when `us.point.com` should be operating as the primary site.
+
+- **`ENABLE_BACKUP_MODE = false` (Disabled/Redirect Mode):**
+  - The backup site `us.point.com` is **inactive**.
+  - Redirects all traffic from `us.point.com` to `https://point.com`.
+  - Blocks all crawlers and bots via a restrictive `robots.txt`.
+  - Injects a `<meta name="robots" content="noindex, nofollow">` tag into all HTML pages to prevent indexing.
+  - This is the standard mode when `point.com` is operating normally.
+
+### Custom Redirects
+
+The worker handles several types of redirects:
+
+- **Clean URLs:** Redirects `page.html` to `/page` and `/about/index.html` to `/about/`.
+- **Content Migration:** Redirects legacy paths (e.g., `/blog/*`, `/home-equity/*`) to the homepage or other relevant sections to avoid 404 errors for old content.
+- **404 Fallback:** Any request for a non-existent resource is redirected to the homepage (`/`).
+
+### URL Rewriting
+
+The worker automatically rewrites extensionless URLs to their corresponding HTML files (e.g., a request to `/about` serves `/about.html`). This allows for cleaner URLs without requiring file extensions.
+
+### Observability
+
+Observability is enabled in `wrangler.toml`, allowing for detailed logging and monitoring of the Worker's performance in the Cloudflare dashboard.
 
 ## References
 
