@@ -4,11 +4,11 @@
  * - Handles requests for static files using @cloudflare/kv-asset-handler.
  * - If ENABLE_BACKUP_MODE is true, allows all crawlers and page indexing, and serves us.point.com.
  * - If ENABLE_BACKUP_MODE is false, blocks all crawlers and page indexing, and redirects us.point.com to point.com.
- * - Falls back to index.html for SPA routes, or returns 404 if not found.
+ * - Falls back to / for SPA routes, or returns 404 if not found.
  */
 import { getAssetFromKV } from "@cloudflare/kv-asset-handler";
 
-const ENABLE_BACKUP_MODE = true; // Set to true to allow all crawlers and indexing, and serve us.point.com. Set to false to block indexing and redirect us.point.com to point.com.
+const ENABLE_BACKUP_MODE = false; // Set to true to allow all crawlers and indexing, and serve us.point.com. Set to false to block indexing and redirect us.point.com to point.com.
 
 const ROBOTS_TXT = ENABLE_BACKUP_MODE
   ? `User-agent: *\nAllow: /\n`
