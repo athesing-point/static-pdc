@@ -58,6 +58,16 @@ async function handleEvent(event) {
   const url = new URL(event.request.url);
   let pathname = url.pathname;
 
+  // --- CUSTOM REDIRECTS FOR MISSING CMS CONTENT ---
+  // Redirect all /blog, /blog/*, /blog/category/*, /home-equity/* to "/"
+  if (/^\/blog(\/.*)?$/.test(pathname) || /^\/blog$/.test(pathname) || /^\/blog\/category(\/.*)?$/.test(pathname) || /^\/home-equity(\/.*)?$/.test(pathname)) {
+    return Response.redirect(`${url.origin}/`, 302);
+  }
+  // Redirect all /start/* (except exactly "/start") to "/start"
+  if (/^\/start\/.+/.test(pathname)) {
+    return Response.redirect(`${url.origin}/start`, 302);
+  }
+
   // --- REDIRECTS FOR CLEAN URLS ---
   // Redirect /index or /index.html to /
   if (pathname === "/index" || pathname === "/index.html") {
