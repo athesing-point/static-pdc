@@ -59,12 +59,35 @@ async function handleEvent(event) {
   let pathname = url.pathname;
 
   // --- CUSTOM REDIRECTS FOR MISSING CMS CONTENT ---
-  // Redirect all /blog, /blog/*, /blog/category/*, /home-equity/*, /partner/* to "/"
-  if (/^\/blog(\/.*)?$/.test(pathname) || /^\/blog$/.test(pathname) || /^\/blog\/category(\/.*)?$/.test(pathname) || /^\/home-equity(\/.*)?$/.test(pathname) || /^\/partner(\/.*)?$/.test(pathname)) {
+  // Redirect all /blog, /blog/, /blog/*, /blog/category, /blog/category/, /blog/category/*, /home-equity, /home-equity/, /home-equity/*, /partner, /partner/, /partner/* to "/"
+  if (
+    /^\/blog(\/.*)?$/.test(pathname) ||
+    pathname === "/blog" ||
+    pathname === "/blog/" ||
+    /^\/blog\/category(\/.*)?$/.test(pathname) ||
+    pathname === "/blog/category" ||
+    pathname === "/blog/category/" ||
+    /^\/home-equity(\/.*)?$/.test(pathname) ||
+    pathname === "/home-equity" ||
+    pathname === "/home-equity/" ||
+    /^\/partner(\/.*)?$/.test(pathname) ||
+    pathname === "/partner" ||
+    pathname === "/partner/"
+  ) {
     return Response.redirect(`${url.origin}/`, 302);
   }
   // Redirect all /or, /or/, /or/*, /vs, /vs/, /vs/*, /start, /start/, /start/* to "/start"
-  if (/^\/or(\/.*)?$/.test(pathname) || /^\/vs(\/.*)?$/.test(pathname) || /^\/start(\/.*)?$/.test(pathname) || pathname === "/or" || pathname === "/vs" || pathname === "/start") {
+  if (
+    /^\/or(\/.*)?$/.test(pathname) ||
+    pathname === "/or" ||
+    pathname === "/or/" ||
+    /^\/vs(\/.*)?$/.test(pathname) ||
+    pathname === "/vs" ||
+    pathname === "/vs/" ||
+    /^\/start(\/.*)?$/.test(pathname) ||
+    pathname === "/start" ||
+    pathname === "/start/"
+  ) {
     return Response.redirect(`${url.origin}/start`, 302);
   }
 
