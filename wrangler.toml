@@ -5,4 +5,8 @@ main = "worker.js"
 [site]
 bucket = "/pdc-zip"
 
+# Enable observability and logs
+[observability]
+enabled = true
+
 # Custom domain: us.point.com (configured in Cloudflare dashboard)
