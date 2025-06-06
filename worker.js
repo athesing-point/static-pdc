@@ -63,8 +63,8 @@ async function handleEvent(event) {
   if (/^\/blog(\/.*)?$/.test(pathname) || /^\/blog$/.test(pathname) || /^\/blog\/category(\/.*)?$/.test(pathname) || /^\/home-equity(\/.*)?$/.test(pathname) || /^\/partner(\/.*)?$/.test(pathname)) {
     return Response.redirect(`${url.origin}/`, 302);
   }
-  // Redirect all /or, /or/, /or/* and /vs/* to "/start"
-  if (/^\/or(\/.*)?$/.test(pathname) || /^\/vs\/.+/.test(pathname)) {
+  // Redirect all /or, /or/, /or/*, /vs, /vs/, /vs/*, /start, /start/, /start/* to "/start"
+  if (/^\/or(\/.*)?$/.test(pathname) || /^\/vs(\/.*)?$/.test(pathname) || /^\/start(\/.*)?$/.test(pathname) || pathname === "/or" || pathname === "/vs" || pathname === "/start") {
     return Response.redirect(`${url.origin}/start`, 302);
   }
 
