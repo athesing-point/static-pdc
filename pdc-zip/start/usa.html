@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--  Last Published: Tue Jun 03 2025 21:07:07 GMT+0000 (Coordinated Universal Time)  -->
+<!DOCTYPE html><!--  Last Published: Thu Jun 12 2025 18:58:39 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="67e2225f2f316866eda16c0d" data-wf-site="62fb9110be019f3cf956c118" lang="en">
 <head>
   <meta charset="utf-8">
@@ -47,29 +47,6 @@
     j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
     f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-53X7Z9W');
-</script>
-  <script src="https://d2wy8f7a9ursnm.cloudfront.net/v8/bugsnag.min.js"></script>
-  <script>
-  // Determine the release stage
-  const hostname = window.location.hostname.replace(/^www\./, '');
-  let releaseStage = 'production'; // default fallback
-  if (hostname === 'point.com') {
-    releaseStage = 'production';
-  } else if (hostname === 'point.dev' || hostname.endsWith('.webflow.io')) {
-    releaseStage = 'staging'; // or use 'development' if you prefer
-  }
-  // Start Bugsnag with conditional breadcrumb disabling
-  Bugsnag.start({
-    apiKey: '775d292c8036ad2d50b97ff4e113db19',
-    releaseStage: releaseStage,
-    autoBreadcrumbs: releaseStage === 'production' ? undefined : {
-      console: false,
-      network: false,
-      navigation: false,
-      user: false,
-      log: false,
-    }
-  });
 </script>
   <!-- NO DELETE | Sets default/load state for all GSAP powered quick animations -->
   <style>
@@ -221,7 +198,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 <div class="socialproof-content">
                   <div class="text-weight-bold">Excellent</div>
                   <div class="text-weight-bold">
-                    <div class="inline">4.6</div>
+                    <div class="inline">4.7</div>
                   </div>
                   <div class="text-style-nowrap">out of 5</div><img src="../images/TrustPilot-KO.svg" loading="eager" alt="Trustpilot" class="image-review-source-logo">
                 </div>
@@ -241,25 +218,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
         </div>
       </div>
     </div>
+    <div class="padding-medium"></div>
+    <div class="horizontal-rule"></div>
   </section>
-  <div class="padding-medium"></div>
-  <div class="horizontal-rule"></div>
   <div class="page-padding">
     <div class="container-medium">
       <div>
         <div class="padding-medium"></div>
-        <div>
-          <div class="text-align-center">
-            <h1 id="avg-homeowner" class="heading-medium text-wrap-balance">Homeowners love getting cash from Point&#x27;s Home Equity Investment<sup class="headline-superscript">1</sup></h1>
-            <div class="padding-small"></div>
-            <div class="max-width-large align-center">
-              <p class="text-size-large text-wrap-balance">We&#x27;ve funded more than <strong>10,000</strong> homeowners, and have over <strong>1,000</strong><strong> five star </strong>reviews from happy homeowners.</p>
-            </div>
-            <div class="max-width-medium align-center"></div>
+        <div class="text-align-center">
+          <h2 id="avg-homeowner" class="heading-medium text-wrap-balance">Homeowners love getting cash from Point&#x27;s Home Equity Investment<sup class="headline-superscript">1</sup></h2>
+          <div class="padding-small"></div>
+          <div class="max-width-large align-center">
+            <p class="text-size-large text-wrap-balance">We&#x27;ve funded more than <strong>10,000</strong> homeowners, and have over <strong>1,000</strong><strong> five star </strong>reviews from happy homeowners.</p>
           </div>
+          <div class="max-width-medium align-center"></div>
         </div>
         <div class="padding-medium"></div>
-        <div id="w-node-f56e5d97-8125-2677-0c60-b209a5edd183-eda16c0d" class="max-width-large align-center"></div>
         <div>
           <div class="w-dyn-list">
             <div role="list" class="reviews_collection_list no-gap w-dyn-items">
@@ -288,9 +262,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
           </div>
         </div>
       </div>
+      <div class="padding-xlarge"></div>
     </div>
   </div>
-  <div class="padding-xlarge"></div>
   <div class="horizontal-rule"></div>
   <footer class="lp-footer">
     <div class="page-padding">
@@ -302,7 +276,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
               <div class="socialproof-content">
                 <div class="text-weight-bold">Excellent</div>
                 <div class="text-weight-bold">
-                  <div class="inline">4.6</div>
+                  <div class="inline">4.7</div>
                 </div>
                 <div class="text-style-nowrap">out of 5</div><img src="../images/Frame-402-1.svg" loading="eager" alt="Trustpilot" class="image-review-source-logo">
               </div>
@@ -469,26 +443,19 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
   <script src="https://d2wy8f7a9ursnm.cloudfront.net/v8/bugsnag.min.js"></script>
   <script>
-  // Determine the release stage
-  const hostname = window.location.hostname.replace(/^www\./, '');
-  let releaseStage = 'production'; // default fallback
-  if (hostname === 'point.com') {
-    releaseStage = 'production';
-  } else if (hostname === 'point.dev' || hostname.endsWith('.webflow.io')) {
-    releaseStage = 'staging'; // or use 'development' if you prefer
+const bshostname = window.location.hostname.replace(/^www\./, '');
+const releaseStage = bshostname === 'point.com' ? 'production' : 'staging';
+Bugsnag.start({
+  apiKey: '775d292c8036ad2d50b97ff4e113db19',
+  releaseStage,
+  autoBreadcrumbs: releaseStage === 'production' ? true : {
+    console: false,
+    network: false,
+    navigation: false,
+    user: false,
+    log: false,
   }
-  // Start Bugsnag with conditional breadcrumb disabling
-  Bugsnag.start({
-    apiKey: '775d292c8036ad2d50b97ff4e113db19',
-    releaseStage: releaseStage,
-    autoBreadcrumbs: releaseStage === 'production' ? undefined : {
-      console: false,
-      network: false,
-      navigation: false,
-      user: false,
-      log: false,
-    }
-  });
+});
 </script><!-- <script src="http://127.0.0.1:5500/client.js"></script> -->
   <script>
 (() => {

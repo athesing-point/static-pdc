@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--  Last Published: Tue Jun 03 2025 21:07:07 GMT+0000 (Coordinated Universal Time)  -->
+<!DOCTYPE html><!--  Last Published: Thu Jun 12 2025 18:58:39 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="66ba364d7405ba0eed495810" data-wf-site="62fb9110be019f3cf956c118" lang="en">
 <head>
   <meta charset="utf-8">
@@ -47,29 +47,6 @@
     j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
     f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-53X7Z9W');
-</script>
-  <script src="https://d2wy8f7a9ursnm.cloudfront.net/v8/bugsnag.min.js"></script>
-  <script>
-  // Determine the release stage
-  const hostname = window.location.hostname.replace(/^www\./, '');
-  let releaseStage = 'production'; // default fallback
-  if (hostname === 'point.com') {
-    releaseStage = 'production';
-  } else if (hostname === 'point.dev' || hostname.endsWith('.webflow.io')) {
-    releaseStage = 'staging'; // or use 'development' if you prefer
-  }
-  // Start Bugsnag with conditional breadcrumb disabling
-  Bugsnag.start({
-    apiKey: '775d292c8036ad2d50b97ff4e113db19',
-    releaseStage: releaseStage,
-    autoBreadcrumbs: releaseStage === 'production' ? undefined : {
-      console: false,
-      network: false,
-      navigation: false,
-      user: false,
-      log: false,
-    }
-  });
 </script>
   <!-- NO DELETE | Sets default/load state for all GSAP powered quick animations -->
   <style>
@@ -822,9 +799,10 @@ document.addEventListener('DOMContentLoaded', function () {
                       </svg></div>
                   </a>
                   <div class="w-embed">
-                    <a href="https://twitter.com/intent/tweet?url=https://point.com/blog/" class="social-icon-link" id="twitter-share">
-                      <svg class="social-icon-embed" width="100%" height="100%" viewbox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.60327 7.43241C1.78134 7.47149 1.96392 7.48601 2.14592 7.47558C2.40962 7.47995 2.67221 7.44035 2.92289 7.35841C2.23325 7.22013 1.61383 6.84463 1.17225 6.29716C0.730659 5.74968 0.494803 5.06481 0.505648 4.36153V4.31836C0.911699 4.5648 1.3751 4.70084 1.84993 4.71301C1.44912 4.41364 1.12269 4.02594 0.895976 3.57999C0.669259 3.13404 0.548354 2.64185 0.542646 2.14161C0.536667 1.60866 0.670621 1.08347 0.931132 0.618499C1.67181 1.55931 2.60536 2.3306 3.669 2.8805C4.73264 3.43041 5.90171 3.74617 7.09757 3.80655C7.05299 3.56852 7.02824 3.3272 7.02357 3.08507C7.00704 2.6958 7.06754 2.30709 7.20158 1.94124C7.33562 1.5754 7.54058 1.23962 7.80469 0.953161C8.0688 0.666707 8.38687 0.435217 8.74065 0.271969C9.09443 0.108721 9.47696 0.0169279 9.8663 0.00185576C10.3003 -0.0134233 10.7324 0.0657931 11.1327 0.234021C11.5331 0.402249 11.8921 0.655469 12.1849 0.976153C12.8586 0.857076 13.5033 0.610082 14.0841 0.248513C13.8495 0.938489 13.4214 1.54642 12.8509 1.99978C13.4445 1.94495 14.0244 1.78851 14.5651 1.5373C14.1837 2.15043 13.69 2.68601 13.1098 3.11591V3.50439C13.1098 7.54957 10.076 12.2176 4.58783 12.2176C2.95802 12.2229 1.3626 11.749 0 10.8548C0.232171 10.8937 0.467784 10.9082 0.702974 10.8979C2.05267 10.8983 3.36054 10.4297 4.40283 9.57216C3.77126 9.55224 3.16175 9.33521 2.65972 8.95149C2.15768 8.56778 1.78828 8.03661 1.60327 7.43241V7.43241Z" fill="currentColor"></path>
+                    <a id="x-share-link" href="#" target="_blank" class="social-icon-link">
+                      <svg class="social-icon-embed" width="19" height="19" viewbox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.3076 9.0452L20.3808 1H18.7046L12.563 7.98554L7.65769 1H2L9.41779 11.5634L2 20H3.67621L10.1619 12.623L15.3423 20H21L13.3076 9.0452ZM11.0118 11.6564L10.2602 10.6046L4.28017 2.2347H6.85474L11.6807 8.98944L12.4323 10.0413L18.7054 18.8215H16.1309L11.0118 11.6564Z" fill="currentColor"></path>
+                        <path d="M7.78809 0.75L7.8623 0.856445L12.584 7.58105L18.5166 0.834961L18.5918 0.75H20.9336L20.5684 1.16504L13.624 9.06152L21.2051 19.8564L21.4814 20.25H15.2119L15.1377 20.1436L10.1396 13.0264L3.86426 20.165L3.78906 20.25H1.44727L1.8125 19.835L9.09961 11.5459L1.79492 1.14355L1.51855 0.75H7.78809ZM10.4639 10.459L11.2148 11.5107L16.2598 18.5713H18.2197L12.2285 10.1865L11.4775 9.13477L6.72559 2.48438H4.76562L10.4639 10.459Z" stroke="currentColor" stroke-width="0.4"></path>
                       </svg>
                     </a>
                   </div>
@@ -847,6 +825,17 @@ document.addEventListener('DOMContentLoaded', function () {
     var twitterShareLink = document.getElementById('twitter-share');
     var currentUrl = window.location.href;
     twitterShareLink.href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(currentUrl);
+  });
+</script>
+                  </div>
+                  <div class="twitter-share-url w-embed w-script">
+                    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const currentUrl = encodeURIComponent(window.location.href);
+    const shareLink = document.getElementById("x-share-link");
+    if (shareLink) {
+      shareLink.href = `https://x.com/intent/post?url=${currentUrl}`;
+    }
   });
 </script>
                   </div>
@@ -1118,7 +1107,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="socialproof-content">
                   <div class="text-weight-bold">Excellent</div>
                   <div class="text-weight-bold">
-                    <div class="inline">4.6</div>
+                    <div class="inline">4.7</div>
                   </div>
                   <div class="text-style-nowrap">out of 5</div><img src="../images/Frame-402-1.svg" loading="eager" alt="Trustpilot" class="image-review-source-logo">
                 </div>
@@ -1396,26 +1385,19 @@ function Copy() {
 </script>
   <script src="https://d2wy8f7a9ursnm.cloudfront.net/v8/bugsnag.min.js"></script>
   <script>
-  // Determine the release stage
-  const hostname = window.location.hostname.replace(/^www\./, '');
-  let releaseStage = 'production'; // default fallback
-  if (hostname === 'point.com') {
-    releaseStage = 'production';
-  } else if (hostname === 'point.dev' || hostname.endsWith('.webflow.io')) {
-    releaseStage = 'staging'; // or use 'development' if you prefer
+const bshostname = window.location.hostname.replace(/^www\./, '');
+const releaseStage = bshostname === 'point.com' ? 'production' : 'staging';
+Bugsnag.start({
+  apiKey: '775d292c8036ad2d50b97ff4e113db19',
+  releaseStage,
+  autoBreadcrumbs: releaseStage === 'production' ? true : {
+    console: false,
+    network: false,
+    navigation: false,
+    user: false,
+    log: false,
   }
-  // Start Bugsnag with conditional breadcrumb disabling
-  Bugsnag.start({
-    apiKey: '775d292c8036ad2d50b97ff4e113db19',
-    releaseStage: releaseStage,
-    autoBreadcrumbs: releaseStage === 'production' ? undefined : {
-      console: false,
-      network: false,
-      navigation: false,
-      user: false,
-      log: false,
-    }
-  });
+});
 </script><!-- Production Script -->
   <script defer="" src="https://cdn.jsdelivr.net/gh/athesing-point/pdc-calcs@941633e0/home-improvement/calc.js"></script>
   <script>

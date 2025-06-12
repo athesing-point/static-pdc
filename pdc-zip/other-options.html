@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--  Last Published: Tue Jun 03 2025 21:07:07 GMT+0000 (Coordinated Universal Time)  -->
+<!DOCTYPE html><!--  Last Published: Thu Jun 12 2025 18:58:39 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="68013f130d1faa58216b2ffb" data-wf-site="62fb9110be019f3cf956c118" lang="en">
 <head>
   <meta charset="utf-8">
@@ -46,29 +46,6 @@
     f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-53X7Z9W');
 </script>
-  <script src="https://d2wy8f7a9ursnm.cloudfront.net/v8/bugsnag.min.js"></script>
-  <script>
-  // Determine the release stage
-  const hostname = window.location.hostname.replace(/^www\./, '');
-  let releaseStage = 'production'; // default fallback
-  if (hostname === 'point.com') {
-    releaseStage = 'production';
-  } else if (hostname === 'point.dev' || hostname.endsWith('.webflow.io')) {
-    releaseStage = 'staging'; // or use 'development' if you prefer
-  }
-  // Start Bugsnag with conditional breadcrumb disabling
-  Bugsnag.start({
-    apiKey: '775d292c8036ad2d50b97ff4e113db19',
-    releaseStage: releaseStage,
-    autoBreadcrumbs: releaseStage === 'production' ? undefined : {
-      console: false,
-      network: false,
-      navigation: false,
-      user: false,
-      log: false,
-    }
-  });
-</script>
   <!-- NO DELETE | Sets default/load state for all GSAP powered quick animations -->
   <style>
 [data-anim=fadeIn]{opacity:0}[data-anim=slideUp]{opacity:0;transform:translateY(2rem)}[data-anim=slideDown]{opacity:0;transform:translateY(-2rem)}[data-anim=slideLeft]{opacity:0;transform:translate(-2rem)}[data-anim=slideRight]{opacity:0;transform:translate(2rem)}[data-anim=scaleIn]{opacity:0;transform:scale(.85)}[data-anim=flipUp]{opacity:0;transform:translateY(2rem) rotateX(90deg);transform-origin:center bottom;perspective:1000px;backface-visibility:hidden}[data-anim]{will-change:transform,opacity,height}.product-faq-content,.accordion-content{height:0;opacity:0;overflow:hidden}noscript~* [data-anim]{opacity:1!important;transform:none!important}
@@ -112,8 +89,8 @@
                 <div class="text-size-small">Explore loan options with <span class="text-weight-medium">MoneyLion</span> — no home equity needed.</div>
               </div>
               <div class="padding-xsmall"></div>
-              <a href="https://www.moneylion.com/network/point-declines/loans/search/loan-purpose" class="text-link-background w-inline-block"><img src="images/MoneyLion.svg" loading="lazy" alt="MoneyLion" class="align-center affiliate-logo"></a>
-              <div class="padding-vertical padding-small">
+              <a href="https://www.moneylion.com/network/point-declines/loans/search/loan-purpose" class="text-link-background padding-small w-inline-block"><img src="images/MoneyLion.svg" loading="lazy" alt="MoneyLion" class="align-center affiliate-logo"></a>
+              <div class="padding-vertical padding-xsmall">
                 <div class="horizontal-rule"></div>
               </div>
               <p class="text-wrap-balance">MoneyLion helps you find and compare personalized loan options from top providers.</p>
@@ -208,26 +185,19 @@
 </script>
   <script src="https://d2wy8f7a9ursnm.cloudfront.net/v8/bugsnag.min.js"></script>
   <script>
-  // Determine the release stage
-  const hostname = window.location.hostname.replace(/^www\./, '');
-  let releaseStage = 'production'; // default fallback
-  if (hostname === 'point.com') {
-    releaseStage = 'production';
-  } else if (hostname === 'point.dev' || hostname.endsWith('.webflow.io')) {
-    releaseStage = 'staging'; // or use 'development' if you prefer
+const bshostname = window.location.hostname.replace(/^www\./, '');
+const releaseStage = bshostname === 'point.com' ? 'production' : 'staging';
+Bugsnag.start({
+  apiKey: '775d292c8036ad2d50b97ff4e113db19',
+  releaseStage,
+  autoBreadcrumbs: releaseStage === 'production' ? true : {
+    console: false,
+    network: false,
+    navigation: false,
+    user: false,
+    log: false,
   }
-  // Start Bugsnag with conditional breadcrumb disabling
-  Bugsnag.start({
-    apiKey: '775d292c8036ad2d50b97ff4e113db19',
-    releaseStage: releaseStage,
-    autoBreadcrumbs: releaseStage === 'production' ? undefined : {
-      console: false,
-      network: false,
-      navigation: false,
-      user: false,
-      log: false,
-    }
-  });
+});
 </script><!--  Dropdown Anim  -->
   <script>
 document.addEventListener("DOMContentLoaded",(()=>{(()=>{const e=document.querySelector("#reason-dropdown"),t=document.querySelector(".hei-denial-explanation");if(!e||!t)return;let n=!1;gsap.set(t,{opacity:0,display:"none",y:"-0.5rem",scale:.95,transformOrigin:"top"});const o=()=>{n&&(n=!1,gsap.to(t,{opacity:0,y:"-0.5rem",scale:.95,duration:.15,ease:"power2.in",onComplete:()=>{t.style.display="none"}}))};e.addEventListener("click",(e=>{e.preventDefault(),e.stopPropagation(),n?o():n||(n=!0,t.style.display="block",gsap.to(t,{opacity:1,y:0,scale:1,duration:.2,ease:"back.out(2)"}))})),document.addEventListener("click",(a=>{!n||t.contains(a.target)||e.contains(a.target)||o()})),document.addEventListener("keydown",(e=>{"Escape"===e.key&&n&&o()}))})()}));

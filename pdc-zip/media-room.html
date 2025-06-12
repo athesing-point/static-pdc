@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--  Last Published: Tue Jun 03 2025 21:07:07 GMT+0000 (Coordinated Universal Time)  -->
+<!DOCTYPE html><!--  Last Published: Thu Jun 12 2025 18:58:39 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="65ca8f4f968f2f9be7e0a386" data-wf-site="62fb9110be019f3cf956c118" lang="en">
 <head>
   <meta charset="utf-8">
@@ -47,29 +47,6 @@
     j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
     f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-53X7Z9W');
-</script>
-  <script src="https://d2wy8f7a9ursnm.cloudfront.net/v8/bugsnag.min.js"></script>
-  <script>
-  // Determine the release stage
-  const hostname = window.location.hostname.replace(/^www\./, '');
-  let releaseStage = 'production'; // default fallback
-  if (hostname === 'point.com') {
-    releaseStage = 'production';
-  } else if (hostname === 'point.dev' || hostname.endsWith('.webflow.io')) {
-    releaseStage = 'staging'; // or use 'development' if you prefer
-  }
-  // Start Bugsnag with conditional breadcrumb disabling
-  Bugsnag.start({
-    apiKey: '775d292c8036ad2d50b97ff4e113db19',
-    releaseStage: releaseStage,
-    autoBreadcrumbs: releaseStage === 'production' ? undefined : {
-      console: false,
-      network: false,
-      navigation: false,
-      user: false,
-      log: false,
-    }
-  });
 </script>
   <!-- NO DELETE | Sets default/load state for all GSAP powered quick animations -->
   <style>
@@ -432,7 +409,7 @@
               <div class="padding-xsmall"></div>
               <p>Would you like to talk to someone from Point for a story? Contact our communications team via the link below.</p>
               <div class="padding-xsmall"></div>
-              <div class="illy-wrap contact"><img src="images/contact-art.webp" loading="lazy" sizes="(max-width: 479px) 100vw, 302px" alt="" width="302" srcset="images/contact-art-p-500.webp 500w, images/contact-art-p-800.webp 800w, images/contact-art.webp 970w" class="press-contact-image"></div>
+              <div class="illy-wrap contact"><img src="images/contact-art.webp" loading="lazy" sizes="(max-width: 479px) 100vw, 301.99676513671875px" alt="" width="302" srcset="images/contact-art-p-500.webp 500w, images/contact-art-p-800.webp 800w, images/contact-art.webp 970w" class="press-contact-image"></div>
               <div class="column">
                 <div id="w-node-d3f54b6c-b233-b321-5170-e492e0b95339-e7e0a386" class="contact-item wide">
                   <div class="flex-grow">
@@ -481,7 +458,7 @@
                         <div class="text-size-large text-weight-bold">LinkedIn</div>
                       </div>
                     </a>
-                    <a id="w-node-ee3b980f-d1ba-57b1-e89e-32ca3f4b2006-e7e0a386" href="https://twitter.com/pointfinance" target="_blank" class="w-inline-block">
+                    <a id="w-node-ee3b980f-d1ba-57b1-e89e-32ca3f4b2006-e7e0a386" href="https://x.com/pointhomeequity" target="_blank" class="w-inline-block">
                       <div id="w-node-ee3b980f-d1ba-57b1-e89e-32ca3f4b2007-e7e0a386" class="social-item-wrapper small"><img src="images/Frame-217.svg" loading="lazy" alt="Twitter" class="icon-medium">
                         <div class="text-size-large text-weight-bold">Twitter</div>
                       </div>
@@ -552,7 +529,7 @@
               <div class="padding-medium"></div>
               <a href="media-room/press-release.html" class="button is-gray0 w-button">View All</a>
               <div class="padding-medium"></div>
-              <div class="illy-wrap hide"><img src="images/hiw-appreciation_starting.webp" loading="lazy" sizes="(max-width: 479px) 100vw, 302px" alt="A key hanging from a keychain with a dollar sign on it." width="302" srcset="images/hiw-appreciation_starting-p-500.png 500w, images/hiw-appreciation_starting.webp 604w" class="hiw-tab-image"></div>
+              <div class="illy-wrap hide"><img src="images/hiw-appreciation_starting.webp" loading="lazy" sizes="(max-width: 479px) 100vw, 301.99676513671875px" alt="A key hanging from a keychain with a dollar sign on it." width="302" srcset="images/hiw-appreciation_starting-p-500.png 500w, images/hiw-appreciation_starting.webp 604w" class="hiw-tab-image"></div>
               <div class="scrolling-section-divider"></div>
             </div>
             <div id="asv">
@@ -656,7 +633,7 @@
               <div class="socialproof-content">
                 <div class="text-weight-bold">Excellent</div>
                 <div class="text-weight-bold">
-                  <div class="inline">4.6</div>
+                  <div class="inline">4.7</div>
                 </div>
                 <div class="text-style-nowrap">out of 5</div><img src="images/Frame-402-1.svg" loading="eager" alt="Trustpilot" class="image-review-source-logo">
               </div>
@@ -877,26 +854,19 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
   <script src="https://d2wy8f7a9ursnm.cloudfront.net/v8/bugsnag.min.js"></script>
   <script>
-  // Determine the release stage
-  const hostname = window.location.hostname.replace(/^www\./, '');
-  let releaseStage = 'production'; // default fallback
-  if (hostname === 'point.com') {
-    releaseStage = 'production';
-  } else if (hostname === 'point.dev' || hostname.endsWith('.webflow.io')) {
-    releaseStage = 'staging'; // or use 'development' if you prefer
+const bshostname = window.location.hostname.replace(/^www\./, '');
+const releaseStage = bshostname === 'point.com' ? 'production' : 'staging';
+Bugsnag.start({
+  apiKey: '775d292c8036ad2d50b97ff4e113db19',
+  releaseStage,
+  autoBreadcrumbs: releaseStage === 'production' ? true : {
+    console: false,
+    network: false,
+    navigation: false,
+    user: false,
+    log: false,
   }
-  // Start Bugsnag with conditional breadcrumb disabling
-  Bugsnag.start({
-    apiKey: '775d292c8036ad2d50b97ff4e113db19',
-    releaseStage: releaseStage,
-    autoBreadcrumbs: releaseStage === 'production' ? undefined : {
-      console: false,
-      network: false,
-      navigation: false,
-      user: false,
-      log: false,
-    }
-  });
+});
 </script>
 </body>
 </html>

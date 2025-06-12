@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--  Last Published: Tue Jun 03 2025 21:07:07 GMT+0000 (Coordinated Universal Time)  -->
+<!DOCTYPE html><!--  Last Published: Thu Jun 12 2025 18:58:39 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="677c1f9e7ec8c25b3649edc8" data-wf-site="62fb9110be019f3cf956c118" lang="en">
 <head>
   <meta charset="utf-8">
@@ -45,29 +45,6 @@
     j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
     f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-53X7Z9W');
-</script>
-  <script src="https://d2wy8f7a9ursnm.cloudfront.net/v8/bugsnag.min.js"></script>
-  <script>
-  // Determine the release stage
-  const hostname = window.location.hostname.replace(/^www\./, '');
-  let releaseStage = 'production'; // default fallback
-  if (hostname === 'point.com') {
-    releaseStage = 'production';
-  } else if (hostname === 'point.dev' || hostname.endsWith('.webflow.io')) {
-    releaseStage = 'staging'; // or use 'development' if you prefer
-  }
-  // Start Bugsnag with conditional breadcrumb disabling
-  Bugsnag.start({
-    apiKey: '775d292c8036ad2d50b97ff4e113db19',
-    releaseStage: releaseStage,
-    autoBreadcrumbs: releaseStage === 'production' ? undefined : {
-      console: false,
-      network: false,
-      navigation: false,
-      user: false,
-      log: false,
-    }
-  });
 </script>
   <!-- NO DELETE | Sets default/load state for all GSAP powered quick animations -->
   <style>
@@ -210,26 +187,19 @@
 </script>
   <script src="https://d2wy8f7a9ursnm.cloudfront.net/v8/bugsnag.min.js"></script>
   <script>
-  // Determine the release stage
-  const hostname = window.location.hostname.replace(/^www\./, '');
-  let releaseStage = 'production'; // default fallback
-  if (hostname === 'point.com') {
-    releaseStage = 'production';
-  } else if (hostname === 'point.dev' || hostname.endsWith('.webflow.io')) {
-    releaseStage = 'staging'; // or use 'development' if you prefer
+const bshostname = window.location.hostname.replace(/^www\./, '');
+const releaseStage = bshostname === 'point.com' ? 'production' : 'staging';
+Bugsnag.start({
+  apiKey: '775d292c8036ad2d50b97ff4e113db19',
+  releaseStage,
+  autoBreadcrumbs: releaseStage === 'production' ? true : {
+    console: false,
+    network: false,
+    navigation: false,
+    user: false,
+    log: false,
   }
-  // Start Bugsnag with conditional breadcrumb disabling
-  Bugsnag.start({
-    apiKey: '775d292c8036ad2d50b97ff4e113db19',
-    releaseStage: releaseStage,
-    autoBreadcrumbs: releaseStage === 'production' ? undefined : {
-      console: false,
-      network: false,
-      navigation: false,
-      user: false,
-      log: false,
-    }
-  });
+});
 </script><!--  Dropdown Anim  -->
   <script>
 document.addEventListener("DOMContentLoaded",(()=>{(()=>{const e=document.querySelector("#reason-dropdown"),t=document.querySelector(".hei-denial-explanation");if(!e||!t)return;let n=!1;gsap.set(t,{opacity:0,display:"none",y:"-0.5rem",scale:.95,transformOrigin:"top"});const o=()=>{n&&(n=!1,gsap.to(t,{opacity:0,y:"-0.5rem",scale:.95,duration:.15,ease:"power2.in",onComplete:()=>{t.style.display="none"}}))};e.addEventListener("click",(e=>{e.preventDefault(),e.stopPropagation(),n?o():n||(n=!0,t.style.display="block",gsap.to(t,{opacity:1,y:0,scale:1,duration:.2,ease:"back.out(2)"}))})),document.addEventListener("click",(a=>{!n||t.contains(a.target)||e.contains(a.target)||o()})),document.addEventListener("keydown",(e=>{"Escape"===e.key&&n&&o()}))})()}));
