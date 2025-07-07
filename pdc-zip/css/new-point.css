@@ -2533,7 +2533,7 @@ figcaption {
 
 .footer_menu-wrapper.is-2x2 {
   grid-column-gap: 6rem;
-  grid-row-gap: 3rem;
+  grid-row-gap: 2.25rem;
   flex: none;
   grid-template-columns: auto .75fr;
 }
@@ -2575,7 +2575,7 @@ figcaption {
 .reviews_content-wrapper.in-footer {
   justify-content: space-between;
   align-items: center;
-  width: 32.75rem;
+  width: 30.5rem;
 }
 
 .reviews_content-wrapper._w-ffep-hero {
@@ -2979,8 +2979,8 @@ figcaption {
 }
 
 .quote_content {
-  grid-column-gap: 2rem;
-  grid-row-gap: 2rem;
+  grid-column-gap: .5rem;
+  grid-row-gap: .5rem;
   flex-direction: column;
   flex: 0 auto;
   justify-content: space-between;
@@ -2992,7 +2992,10 @@ figcaption {
 }
 
 .quote_content.about {
+  grid-column-gap: .5rem;
+  grid-row-gap: .5rem;
   background-color: #0000;
+  justify-content: flex-start;
 }
 
 .testimonial-art-wrapper {
@@ -6988,10 +6991,6 @@ figcaption {
   max-width: 100%;
 }
 
-.ffep-js-here {
-  display: none;
-}
-
 .cta-rtf-checkbox {
   z-index: 1;
   position: relative;
@@ -7010,10 +7009,6 @@ figcaption {
   align-items: center;
   padding-left: 0;
   display: flex;
-}
-
-.css-custom-bullets_ffep {
-  display: none;
 }
 
 .ffep-spacer {
@@ -8573,11 +8568,6 @@ figcaption {
   top: 6rem;
 }
 
-.blog-checkbox-custom-css {
-  align-self: center;
-  display: none;
-}
-
 .blog-featured-section-illy {
   display: block;
 }
@@ -8935,10 +8925,6 @@ figcaption {
 .product-faq-wrapper {
   z-index: 1;
   position: relative;
-}
-
-.custom {
-  display: block;
 }
 
 .prod-faq-bg_shadow {
@@ -10303,10 +10289,6 @@ figcaption {
   inset: 0%;
 }
 
-.code-javascript {
-  display: none;
-}
-
 .exit-modal-img {
   position: absolute;
 }
@@ -10502,7 +10484,7 @@ figcaption {
 }
 
 .nav-toast-inner.nav-link-edge-align {
-  padding-right: 5rem;
+  padding-right: 5.3rem;
 }
 
 .text-link-soft_underline {
@@ -10524,11 +10506,11 @@ figcaption {
   inset: 0% 0% auto;
 }
 
-.custom-code---javascript {
+.is-javascript {
   display: none;
 }
 
-.custom-code---javascript.show-code-designer {
+.is-javascript.show-embed-designer {
   display: block;
 }
 
@@ -10601,8 +10583,10 @@ figcaption {
   background-size: contain;
   margin-left: -6px;
   margin-right: -4px;
+  padding-bottom: 2px;
   padding-left: 6px;
   padding-right: 6px;
+  display: inline-block;
 }
 
 .wrap-custom_range_slider {
@@ -10786,10 +10770,6 @@ figcaption {
   align-self: stretch;
 }
 
-.code-embed {
-  align-self: center;
-}
-
 .min-height-100vh {
   min-height: 100vh;
   position: relative;
@@ -10867,11 +10847,11 @@ figcaption {
   display: grid;
 }
 
-.custom-code---css {
+.is-css {
   display: none;
 }
 
-.custom-code---css.show-code-designer {
+.is-css.show-embed-designer {
   display: block;
 }
 
@@ -11061,6 +11041,10 @@ figcaption {
   padding-top: 1rem;
   padding-bottom: 1rem;
   display: flex;
+}
+
+.rtf-comp-table {
+  text-wrap: balance;
 }
 
 .rtf-comp-table ul {
@@ -11657,10 +11641,6 @@ figcaption {
   display: none;
 }
 
-.ffepv2-js {
-  display: none;
-}
-
 .toast-check {
   object-fit: contain;
   flex-shrink: 0;
@@ -11989,6 +11969,10 @@ figcaption {
     height: 2.1rem;
   }
 
+  .footer-row {
+    margin-left: -.25rem;
+  }
+
   .quote_content {
     max-width: 34rem;
   }
@@ -12158,7 +12142,7 @@ figcaption {
   }
 
   .nav-toast-inner.nav-link-edge-align {
-    padding-right: 3.8rem;
+    padding-right: 4.3rem;
   }
 
   .bbb-badge {
@@ -12437,7 +12421,7 @@ figcaption {
   }
 
   .nav-toast-inner.nav-link-edge-align {
-    padding-left: 2rem;
+    padding-left: 1.5rem;
     padding-right: 0;
   }
 
@@ -12939,7 +12923,7 @@ figcaption {
   }
 
   .italics-quote {
-    font-size: 18px;
+    font-size: 1.1rem;
   }
 
   .italics-small {
@@ -13386,11 +13370,6 @@ figcaption {
     padding-top: 16%;
   }
 
-  .quote_content {
-    grid-column-gap: 1rem;
-    grid-row-gap: 1rem;
-  }
-
   .testimonial-art-wrapper {
     width: 16rem;
     height: 16rem;
@@ -13554,10 +13533,6 @@ figcaption {
   .hei-timeline-image-wrapper {
     background-size: 245%;
     height: 14vw;
-  }
-
-  .heading-xxxsmall {
-    font-size: 1.15rem;
   }
 
   .hei-house-image {
@@ -15787,6 +15762,10 @@ figcaption {
     font-size: 3rem;
   }
 
+  .heading-huge.landing-page {
+    font-size: 5vw;
+  }
+
   .heading-xxsmall {
     font-size: 1.1rem;
   }
@@ -15801,11 +15780,6 @@ figcaption {
 
   .italics-intro {
     font-size: 1rem;
-  }
-
-  .italics-quote {
-    font-size: 17px;
-    line-height: 1.4;
   }
 
   .italics-small {
@@ -17778,6 +17752,7 @@ figcaption {
 
   .li-with-checkbox.circular-mobile {
     font-family: Circular, Arial, sans-serif;
+    font-size: 1rem;
     font-weight: 400;
   }
 
@@ -18688,7 +18663,7 @@ figcaption {
 
   .heading-huge.landing-page {
     white-space: nowrap;
-    font-size: 7.75vw;
+    font-size: 6vw;
   }
 
   .heading-xxsmall {
@@ -18707,7 +18682,7 @@ figcaption {
   }
 
   .italics-quote {
-    font-size: 16px;
+    font-size: 1rem;
   }
 
   .italics-small {
