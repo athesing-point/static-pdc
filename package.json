@@ -8,6 +8,6 @@
   },
   "devDependencies": {
     "@cloudflare/kv-asset-handler": "^0.3.4",
-    "wrangler": "^3.114.9"
+    "wrangler": "4"
   }
 }
