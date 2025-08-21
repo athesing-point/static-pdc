@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "deploy": "wrangler deploy",
-    "start": "wrangler dev"
+    "deploy": "bunx wrangler deploy",
+    "start": "bunx wrangler dev"
   },
   "devDependencies": {
     "@cloudflare/kv-asset-handler": "^0.3.4",
